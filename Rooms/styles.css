@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #578ce6;
+}
+.rooms h1{
+    text-align: center;
+    margin-top: 80px;
+    color: #578ce6;
+    border: solid 1px #fff;
+    background-color: #fff;
+    font-size: 54px;
+}
+.left-rooms button{
+   padding: 50px 90px;
+   margin-left: 300px;
+   margin-top: 80px;
+   color: #fff;
+   background-color: #ac57e6;
+   border-color: #ac57e6;
+   font-size: 45px;
+
+}
+.right-rooms button{
+   padding: 50px 90px;
+   margin-left: 300px;
+   margin-top:30px;
+   color: #fff;
+   background-color: #ac57e6;
+   border-color: #ac57e6;
+   font-size: 45px;
+}
+.add-ok {  
+    margin-top: 50px; 
+}
+.add-ok button{
+    padding: 20px 50px;
+    margin-left: 400px;
+    color: #fff;
+    background-color: #5760e6;
+    border-color: #5760e6;
+    font-size: 20px;
+}
