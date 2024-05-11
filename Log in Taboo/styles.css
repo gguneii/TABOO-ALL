@@ -9,10 +9,10 @@ body {
 }
 form {
   width: 40%;
-  height: 650px;
+  height: 550px;
   margin: 5rem auto;
   padding: 40px;
-  margin-top: 30px;
+  margin-top: 80px;
   border-radius: 10px;
   border-color: 1px solid white;
   background-color: white;
@@ -22,9 +22,10 @@ form h1{
     text-align: center;
     font-weight: bold;
     color: #5760e6;
+    margin-bottom: 10px;
 }
 form .log-in{
-    margin-top: 70px;
+    margin-top: 10px;
     color:#5760e6;
     font-size: 20px;
 }
@@ -35,7 +36,7 @@ form .name {
   font-size: 1rem;
   border: 1px solid #dddfe2;
   border-radius: 5px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 form .password {
   width: 100%;
@@ -46,18 +47,12 @@ form .password {
   border-radius: 5px;
   margin: 20px 0;
 }
-.icon-forgotten {
-display: flex;
-color: #5760e6;
-justify-content: space-between;
-
-}
 .icon a{
  margin-left: 5px;
  text-decoration: none;
  color: #5760e6;
 }
-.button-signup button{
+.button-login button{
   margin-top: 70px;
   padding: 15px 60px;
   background-color: #5760e6;
@@ -66,12 +61,12 @@ justify-content: space-between;
   font-weight: bold;
   margin-left: 155px;
 }
-.button-signup p{
+.button-login p{
     margin-left: 235px;
     margin-top: 30px;
     font-size: 20px;
 }
-.button-signup a{
+.button-login a{
     display: inline-block;
     margin-top:20px;
     margin-left: 130px;
@@ -80,7 +75,6 @@ justify-content: space-between;
 }
 .button-signup span{
     color: #5760e6;
-    
 }
 form p{
     margin-top: 50px;
@@ -97,7 +91,7 @@ form .register{
     margin-top: 20px;
 }
 form .sign-up{
-    margin-top: 20px;
+    margin-top: 70px;
     padding: 15px 60px;
     background-color: #5760e6;
     color: white;
@@ -110,5 +104,5 @@ form .sign-up{
 form .return{
     display: inline-block;
     margin-left: 130px;
-    margin-top: 5px;
+    margin-top: 10px;
 }

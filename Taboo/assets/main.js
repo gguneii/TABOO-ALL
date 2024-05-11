@@ -1,3 +1,5 @@
+import { getCurrentUser } from "../../Log in Taboo/index.js";
+
 const messageFeed = document.getElementById('message-feed');
 const messageInput = document.getElementById('message-input');
 const sendButton = document.getElementById('send-button');
@@ -63,6 +65,8 @@ function sendMessageToBackend(senderId, receiverId, messageContent) {
 }
 
 function sendMessage() {
+    const user = getCurrentUser()
+    console.log(user)
     const messageContent = messageInput.value;
     if (messageContent.trim() !== '') {
         // addMessage(messageContent, true); // Assume the host writes the message
@@ -78,11 +82,9 @@ function sendMessage() {
             socket.send(JSON.stringify(message));
         }
         
-       
-
         // Send the message to the backend via Fetch API
-        sendMessageToBackend(message.senderId, message.receiverId, message.messageContent);
-        messageInput.value = '';
+        // sendMessageToBackend(message.senderId, message.receiverId, message.messageContent);
+        // messageInput.value = '';
         
     }
 
