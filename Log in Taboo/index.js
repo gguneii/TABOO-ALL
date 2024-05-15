@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Login successful!"); // You can handle the success response as needed
         // console.log(data); // Output response data to console (for debugging)
         authToken = data.token;
+        localStorage.setItem('token', data.token);
       } else {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to login");
