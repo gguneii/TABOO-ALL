@@ -28,41 +28,115 @@ editableItems.forEach(item => {
             });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const addCardButton = document.querySelector('.ok');
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("cardForm");
 
-    addCardButton.addEventListener('click', async function () {
-        const mainWordInput = document.querySelector('.seed-word input');
-        const mainWord = mainWordInput.value;
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault(); // Prevent the default form submission
+        console.log("Form submission prevented");
 
-        const forbiddenWordsList = document.querySelectorAll('.seed-word ul li span');
-        const forbiddenWords = Array.from(forbiddenWordsList).map(item => item.textContent.trim());
+        // Get the main word from the input
+        const mainWordInput = document.getElementById("mainword");
+        const mainWord = mainWordInput.value.trim();
+        console.log("Main word:", mainWord);
 
-        // Backend server URL
-        const url = 'http://localhost:5000/addCard';
+        // Get all forbidden words from the editable list items
+        const forbiddenWordsElements = document.querySelectorAll("li[contenteditable='true']");
+        const forbiddenWords = [];
+        forbiddenWordsElements.forEach((element) => {
+            const word = element.innerText.trim();
+            if (word) {
+                forbiddenWords.push(word);
+            }
+        });
+        console.log("Forbidden words:", forbiddenWords);
 
+        // Validate input
+        if (!mainWord) {
+            console.error("Main word is required");
+            alert("Main word is required");
+            return;
+        }
+        if (forbiddenWords.length !== 12) {
+            console.error("Exactly 12 forbidden words are required");
+            alert("Please enter exactly 12 forbidden words");
+            return;
+        }
+
+        // Prepare the data to be sent
+        const cardData = {
+            mainWord: mainWord,
+            forbiddenWords: forbiddenWords,
+        };
+        console.log("Card data to be sent:", cardData);
+
+        // Send the data to the server using Fetch API
         try {
-            const response = await fetch(url, {
-                method: 'POST',
+            const response = await fetch("http://localhost:5000/card", { // Change the URL to match your backend server
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ mainWord, forbiddenWords })
+                body: JSON.stringify(cardData),
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            const result = await response.json();
+            console.log("Server response:", result);
 
-            const data = await response.json();
-            // Handle successful card addition, you can redirect user or do other actions here
-            console.log(data);
+            if (response.ok) {
+                alert("Card added successfully");
+                form.reset(); // Clear the form after successful submission
+                
+                // Clear content of editable list items
+                forbiddenWordsElements.forEach((element) => {
+                    element.innerText = "Your word";
+                });
+                
+                mainWordInput.value = ""; // Clear the main word input field
+            } else {
+                console.error("Failed to add card:", result.error);
+                alert("Failed to add card: " + result.error);
+            }
         } catch (error) {
-            console.error('There was a problem adding the card:', error.message);
-            // Handle error, maybe show an error message to the user
+            console.error("Error occurred while adding card:", error);
+            alert("Error occurred while adding card");
         }
     });
 });
+
+
+// async function addCard() {
+//     const seedWordInput = document.querySelector('.seed-word input');
+//     const seedWord = seedWordInput.value.trim();
+
+//     const forbiddenWordsList = document.querySelectorAll('.content li span');
+//     const forbiddenWords = Array.from(forbiddenWordsList).map(word => word.textContent.trim());
+
+//     try {
+//         const response = await fetch('/card', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ mainWord: seedWord, forbiddenWords })
+//         });
+
+//         console.log('Response:', response); // Log the response
+
+//         const data = await response.json();
+//         console.log('Data:', data); // Log the parsed JSON data
+
+//         if (response.ok) {
+//             alert('Card added successfully');
+//             // Optionally, redirect or perform any other action upon success
+//         } else {
+//             alert(data.error || 'Failed to add card');
+//         }
+//     } catch (error) {
+//         console.error('Error adding card:', error);
+//         alert('Failed to add card');
+//     }
+// }
 
 
 
